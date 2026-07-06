@@ -1,0 +1,114 @@
+.calculator-shell {
+    max-width: 360px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-md);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.mode-toggle {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    background-color: var(--color-bg);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs);
+}
+
+.mode-btn {
+    flex: 1;
+    padding: var(--spacing-sm);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--color-text-secondary);
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.mode-btn.active {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.mode-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.display {
+    text-align: right;
+    padding: var(--spacing-md) var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    min-height: 90px;
+}
+
+.display-expression {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    min-height: 1.2em;
+    overflow-wrap: break-word;
+}
+
+.display-result {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    overflow-wrap: break-word;
+}
+
+.calculator-error {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.btn {
+    padding: var(--spacing-md) 0;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    cursor: pointer;
+    background-color: var(--color-button-bg);
+    color: var(--color-text-primary);
+    transition: background-color 0.15s ease;
+}
+
+.btn:hover {
+    background-color: var(--color-button-bg-hover);
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+.btn-operator {
+    background-color: var(--color-button-operator-bg);
+    color: var(--color-button-operator-text);
+}
+
+.btn-operator:hover {
+    background-color: var(--color-accent-hover);
+}
+
+.btn-equals {
+    background-color: var(--color-button-operator-bg);
+    color: var(--color-button-operator-text);
+}
+
+.btn-equals:hover {
+    background-color: var(--color-accent-hover);
+}

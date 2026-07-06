@@ -1,10 +1,53 @@
 ﻿@page
 @model IndexModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Calculator";
+    var tokens = Antiforgery.GetAndStoreTokens(HttpContext);
 }
+<meta name="request-verification-token" content="@tokens.RequestToken" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="calculator-shell">
+    <div class="mode-toggle" role="tablist">
+        <button type="button" class="mode-btn active" data-mode="standard" role="tab" aria-selected="true">Standard</button>
+        <button type="button" class="mode-btn" data-mode="scientific" role="tab" aria-selected="false" disabled title="Coming in the next step">Scientific</button>
+    </div>
+
+    <div class="display">
+        <div class="display-expression" id="display-expression">&nbsp;</div>
+        <div class="display-result" id="display-result">0</div>
+    </div>
+
+    <div id="calculator-error" class="calculator-error" role="alert" hidden></div>
+
+    <div class="button-grid standard-grid" id="standard-grid">
+        <button type="button" class="btn btn-function" data-action="clear">C</button>
+        <button type="button" class="btn btn-function" data-action="backspace">⌫</button>
+        <button type="button" class="btn btn-function" data-action="percent">%</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="/">÷</button>
+
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="7">7</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="8">8</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="9">9</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="*">×</button>
+
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="4">4</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="5">5</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="6">6</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="-">−</button>
+
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="1">1</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="2">2</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="3">3</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="+">+</button>
+
+        <button type="button" class="btn btn-function" data-action="sign">±</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="0">0</button>
+        <button type="button" class="btn btn-digit" data-action="decimal">.</button>
+        <button type="button" class="btn btn-equals" data-action="equals">=</button>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/calculator-ui.js" asp-append-version="true"></script>
+}
