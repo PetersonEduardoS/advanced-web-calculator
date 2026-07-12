@@ -1,7 +1,8 @@
 .calculator-shell {
-    max-width: 360px;
-    margin: var(--spacing-lg) auto;
-    padding: var(--spacing-md);
+    width: 100%;
+    max-width: 480px;
+    margin: var(--spacing-lg);
+    padding: var(--spacing-lg);
     background-color: var(--color-surface);
     border-radius: var(--radius-lg);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
@@ -54,7 +55,7 @@
 }
 
 .display-result {
-    font-size: 2.5rem;
+    font-size: 3.2rem;
     font-weight: 600;
     color: var(--color-text-primary);
     overflow-wrap: break-word;
@@ -76,15 +77,23 @@
 }
 
 .btn {
-    padding: var(--spacing-md) 0;
+    padding: 22px 0;
     border: none;
     border-radius: var(--radius-md);
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-family: var(--font-family);
     cursor: pointer;
     background-color: var(--color-button-bg);
     color: var(--color-text-primary);
     transition: background-color 0.15s ease;
+}
+
+.btn-sci {
+    font-size: 1.15rem;
+}
+
+.btn-zero {
+    font-size: 1.4rem;
 }
 
 .btn:hover {
@@ -111,4 +120,40 @@
 
 .btn-equals:hover {
     background-color: var(--color-accent-hover);
+}
+
+.scientific-grid {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.btn-sci {
+    background-color: var(--color-button-bg);
+    color: var(--color-accent);
+    font-size: 1rem;
+}
+
+.btn-sci:hover {
+    background-color: var(--color-button-bg-hover);
+}
+
+.angle-mode-toggle {
+    display: block;
+    margin: 0 0 var(--spacing-sm) auto;
+    padding: 4px 10px;
+    border: 1px solid var(--color-button-bg-hover);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg);
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.angle-mode-toggle:hover {
+    background-color: var(--color-button-bg);
+}
+
+.button-grid[hidden],
+.angle-mode-toggle[hidden] {
+    display: none !important;
 }

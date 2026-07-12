@@ -10,8 +10,10 @@
 <div class="calculator-shell">
     <div class="mode-toggle" role="tablist">
         <button type="button" class="mode-btn active" data-mode="standard" role="tab" aria-selected="true">Standard</button>
-        <button type="button" class="mode-btn" data-mode="scientific" role="tab" aria-selected="false" disabled title="Coming in the next step">Scientific</button>
+        <button type="button" class="mode-btn" data-mode="scientific" role="tab" aria-selected="false">Scientific</button>
     </div>
+
+    <button type="button" id="angle-mode-toggle" class="angle-mode-toggle" hidden>RAD</button>
 
     <div class="display">
         <div class="display-expression" id="display-expression">&nbsp;</div>
@@ -45,6 +47,47 @@
         <button type="button" class="btn btn-digit" data-action="digit" data-value="0">0</button>
         <button type="button" class="btn btn-digit" data-action="decimal">.</button>
         <button type="button" class="btn btn-equals" data-action="equals">=</button>
+    </div>
+
+    <div class="button-grid scientific-grid" id="scientific-grid" hidden>
+        <button type="button" class="btn btn-function" data-action="clear" style="grid-column:1; grid-row:1;">C</button>
+        <button type="button" class="btn btn-function" data-action="backspace" style="grid-column:2; grid-row:1;">⌫</button>
+        <button type="button" class="btn btn-function" data-action="literal" data-value="(" style="grid-column:3; grid-row:1;">(</button>
+        <button type="button" class="btn btn-function" data-action="literal" data-value=")" style="grid-column:4; grid-row:1;">)</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="/" style="grid-column:5; grid-row:1;">÷</button>
+
+        <button type="button" class="btn btn-sci" data-action="function" data-value="sin" style="grid-column:1; grid-row:2;">sin</button>
+        <button type="button" class="btn btn-sci" data-action="function" data-value="cos" style="grid-column:2; grid-row:2;">cos</button>
+        <button type="button" class="btn btn-sci" data-action="function" data-value="tan" style="grid-column:3; grid-row:2;">tan</button>
+        <button type="button" class="btn btn-sci" data-action="power" style="grid-column:4; grid-row:2;">xʸ</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="*" style="grid-column:5; grid-row:2;">×</button>
+
+        <button type="button" class="btn btn-sci" data-action="function" data-value="log" style="grid-column:1; grid-row:3;">log</button>
+        <button type="button" class="btn btn-sci" data-action="function" data-value="ln" style="grid-column:2; grid-row:3;">ln</button>
+        <button type="button" class="btn btn-sci" data-action="function" data-value="sqrt" style="grid-column:3; grid-row:3;">√</button>
+        <button type="button" class="btn btn-sci" data-action="factorial" style="grid-column:4; grid-row:3;">x!</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="-" style="grid-column:5; grid-row:3;">−</button>
+
+        <button type="button" class="btn btn-sci" data-action="literal" data-value="π" style="grid-column:1; grid-row:4;">π</button>
+        <button type="button" class="btn btn-sci" data-action="literal" data-value="e" style="grid-column:2; grid-row:4;">e</button>
+        <button type="button" class="btn btn-function" data-action="percent" style="grid-column:3; grid-row:4;">%</button>
+        <button type="button" class="btn btn-function" data-action="sign" style="grid-column:4; grid-row:4;">±</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="+" style="grid-column:5; grid-row:4;">+</button>
+
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="7" style="grid-column:1; grid-row:5;">7</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="8" style="grid-column:2; grid-row:5;">8</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="9" style="grid-column:3; grid-row:5;">9</button>
+        <button type="button" class="btn btn-digit" data-action="decimal" style="grid-column:4; grid-row:5;">.</button>
+        <button type="button" class="btn btn-equals" data-action="equals" style="grid-column:5; grid-row:5;">=</button>
+
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="4" style="grid-column:1; grid-row:6;">4</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="5" style="grid-column:2; grid-row:6;">5</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="6" style="grid-column:3; grid-row:6;">6</button>
+        <button type="button" class="btn btn-digit btn-zero" data-action="digit" data-value="0" style="grid-column:4 / span 2; grid-row:6 / span 2;">0</button>
+
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="1" style="grid-column:1; grid-row:7;">1</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="2" style="grid-column:2; grid-row:7;">2</button>
+        <button type="button" class="btn btn-digit" data-action="digit" data-value="3" style="grid-column:3; grid-row:7;">3</button>
     </div>
 </div>
 

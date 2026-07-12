@@ -220,4 +220,68 @@ public class ExpressionParserTests
         // "3 + 4 5" - after parsing "3 + 4" successfully, a stray "5" remains unconsumed
         Assert.Throws<ExpressionEvaluationException>(() => _parser.Parse("3 + 4 5"));
     }
+
+    // ---- Angle mode (degrees vs radians) ----
+
+    [Fact]
+    public void Parse_SinInDegreesMode_ConvertsToRadiansBeforeEvaluating()
+    {
+        var degreesParser = new ExpressionParser(AngleMode.Degrees);
+
+        double result = degreesParser.Parse("sin(90)");
+
+        Assert.Equal(1, result, precision: 10);
+    }
+
+    [Fact]
+    public void Parse_CosInDegreesMode_ConvertsToRadiansBeforeEvaluating()
+    {
+        var degreesParser = new ExpressionParser(AngleMode.Degrees);
+
+        double result = degreesParser.Parse("cos(180)");
+
+        Assert.Equal(-1, result, precision: 10);
+    }
+
+    [Fact]
+    public void Parse_TanInDegreesMode_ConvertsToRadiansBeforeEvaluating()
+    {
+        var degreesParser = new ExpressionParser(AngleMode.Degrees);
+
+        double result = degreesParser.Parse("tan(45)");
+
+        Assert.Equal(1, result, precision: 10);
+    }
+
+    [Fact]
+    public void Parse_SinInRadiansMode_IsUnaffectedByDegreesConversion()
+    {
+        var radiansParser = new ExpressionParser(AngleMode.Radians);
+
+        double result = radiansParser.Parse("sin(0)");
+
+        Assert.Equal(0, result, precision: 10);
+    }
+
+    [Fact]
+    public void Parse_DefaultConstructor_UsesRadiansMode()
+    {
+        var defaultParser = new ExpressionParser();
+
+        // sin(pi/2) = 1 only holds if the argument is treated as radians
+        double result = defaultParser.Parse("sin(π / 2)");
+
+        Assert.Equal(1, result, precision: 10);
+    }
+
+    [Fact]
+    public void Parse_SqrtLogLn_AreUnaffectedByAngleMode()
+    {
+        // sqrt, log, ln are not angle-based; degrees mode must not alter them
+        var degreesParser = new ExpressionParser(AngleMode.Degrees);
+
+        Assert.Equal(4, degreesParser.Parse("sqrt(16)"), precision: 10);
+        Assert.Equal(2, degreesParser.Parse("log(100)"), precision: 10);
+        Assert.Equal(0, degreesParser.Parse("ln(1)"), precision: 10);
+    }
 }

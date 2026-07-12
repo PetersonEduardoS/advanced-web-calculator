@@ -6,8 +6,6 @@ namespace AdvancedCalculator.Web.Pages;
 
 public class IndexModel : PageModel
 {
-    private readonly ExpressionParser _parser = new();
-
     public void OnGet()
     {
     }
@@ -22,7 +20,10 @@ public class IndexModel : PageModel
     {
         try
         {
-            double result = _parser.Parse(request.Expression);
+            var angleMode = request.AngleMode == "degrees" ? AngleMode.Degrees : AngleMode.Radians;
+            var parser = new ExpressionParser(angleMode);
+
+            double result = parser.Parse(request.Expression);
             return new JsonResult(new CalculateResponse(Success: true, Result: result, Error: null));
         }
         catch (ExpressionEvaluationException ex)
@@ -32,6 +33,6 @@ public class IndexModel : PageModel
     }
 }
 
-public record CalculateRequest(string Expression);
+public record CalculateRequest(string Expression, string AngleMode = "radians");
 
 public record CalculateResponse(bool Success, double? Result, string? Error);

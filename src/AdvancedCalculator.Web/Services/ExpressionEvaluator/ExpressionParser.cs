@@ -21,8 +21,14 @@ namespace AdvancedCalculator.Web.Services.ExpressionEvaluator;
 /// </summary>
 public sealed class ExpressionParser
 {
+    private readonly AngleMode _angleMode;
     private List<Token> _tokens = new();
     private int _position;
+
+    public ExpressionParser(AngleMode angleMode = AngleMode.Radians)
+    {
+        _angleMode = angleMode;
+    }
 
     /// <summary>
     /// Tokenizes and evaluates a full expression string, returning the numeric result.
@@ -207,11 +213,15 @@ public sealed class ExpressionParser
         double argument = ParseExpression();
         Expect(TokenType.RightParenthesis, $"Expected closing parenthesis ')' for function '{functionToken.Text}'");
 
+        double angleAdjustedArgument = _angleMode == AngleMode.Degrees
+            ? argument * Math.PI / 180.0
+            : argument;
+
         return functionToken.Text switch
         {
-            "sin" => Math.Sin(argument),
-            "cos" => Math.Cos(argument),
-            "tan" => Math.Tan(argument),
+            "sin" => Math.Sin(angleAdjustedArgument),
+            "cos" => Math.Cos(angleAdjustedArgument),
+            "tan" => Math.Tan(angleAdjustedArgument),
             "log" => argument > 0
                 ? Math.Log10(argument)
                 : throw new ExpressionEvaluationException("log() argument must be positive."),
