@@ -145,6 +145,8 @@
             if (data.success) {
                 lastResult = data.result;
                 render();
+                refreshHistoryPanel();
+
             } else {
                 showError(data.error || "Invalid expression.");
             }
@@ -202,6 +204,59 @@
         }
     }
 
+    async function refreshHistoryPanel() {
+        try {
+            const response = await fetch("/Index?handler=RecentHistory");
+            const entries = await response.json();
+            renderHistoryPanel(entries);
+        } catch (networkError) {
+            // Non-critical: if the panel fails to refresh, the calculator itself still works.
+        }
+    }
+
+    function renderHistoryPanel(entries) {
+        const list = document.getElementById("history-panel-list");
+        const emptyMessage = document.getElementById("history-panel-empty");
+
+        if (!list) {
+            return;
+        }
+
+        if (entries.length === 0) {
+            list.innerHTML = "";
+            if (emptyMessage) {
+                emptyMessage.hidden = false;
+            }
+            return;
+        }
+
+        if (emptyMessage) {
+            emptyMessage.hidden = true;
+        }
+
+        list.innerHTML = entries
+            .map((entry) => `
+                <li class="history-panel-item" data-expression="${escapeHtml(entry.expression)}">
+                    <span class="history-panel-expression">${escapeHtml(entry.expression)}</span>
+                    <span class="history-panel-result">= ${formatNumber(entry.result)}</span>
+                </li>
+            `)
+            .join("");
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function reuseHistoryExpression(expression) {
+        clearError();
+        currentExpression = expression;
+        lastResult = null;
+        render();
+    }
+
     standardGrid.addEventListener("click", handleGridClick);
     scientificGrid.addEventListener("click", handleGridClick);
 
@@ -210,6 +265,16 @@
     });
 
     angleModeToggle.addEventListener("click", toggleAngleMode);
+
+    const historyPanelList = document.getElementById("history-panel-list");
+    if (historyPanelList) {
+        historyPanelList.addEventListener("click", (event) => {
+            const item = event.target.closest(".history-panel-item");
+            if (item) {
+                reuseHistoryExpression(item.dataset.expression);
+            }
+        });
+    }
 
     render();
 })();

@@ -1,0 +1,45 @@
+@page
+@model HistoryModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@{
+    ViewData["Title"] = "History";
+    var tokens = Antiforgery.GetAndStoreTokens(HttpContext);
+}
+<meta name="request-verification-token" content="@tokens.RequestToken" />
+
+<div class="history-shell">
+    <div class="history-header">
+        <h1>History</h1>
+        <a href="/Index" class="back-link">← Back to Calculator</a>
+    </div>
+
+    @if (!Model.Entries.Any())
+    {
+        <p class="history-empty">No calculations yet. Go make some history!</p>
+    }
+    else
+    {
+        <ul class="history-list" id="history-list">
+            @foreach (var entry in Model.Entries)
+            {
+                <li class="history-entry" data-id="@entry.Id">
+                    <div class="history-entry-main">
+                        <span class="history-expression">@entry.Expression</span>
+                        <span class="history-result">= @entry.Result</span>
+                    </div>
+                    <div class="history-entry-actions">
+                        <button type="button" class="icon-btn favorite-btn @(entry.IsFavorite ? "active" : "")" data-action="favorite" title="Toggle favorite">
+                            @(entry.IsFavorite ? "★" : "☆")
+                        </button>
+                        <button type="button" class="icon-btn" data-action="copy" title="Copy expression">⧉</button>
+                        <button type="button" class="icon-btn" data-action="delete" title="Delete entry">🗑</button>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+@section Scripts {
+    <script src="~/js/history.js" asp-append-version="true"></script>
+}
