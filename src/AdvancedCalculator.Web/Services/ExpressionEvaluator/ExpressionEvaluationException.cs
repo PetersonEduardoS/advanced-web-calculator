@@ -1,7 +1,7 @@
 namespace AdvancedCalculator.Web.Services.ExpressionEvaluator;
 
 /// <summary>
-/// Thrown when an expression cannot be tokenized, parsed, or evaluated —
+/// Thrown when an expression cannot be tokenized, parsed, or evaluated,
 /// for example due to unexpected characters, unbalanced parentheses,
 /// division by zero, or a malformed function call.
 /// This is the single exception type surfaced to the UI layer, so the
