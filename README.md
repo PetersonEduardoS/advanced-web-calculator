@@ -1,8 +1,8 @@
 # Advanced Calculator
 
-A scientific web calculator built from scratch with ASP.NET Core, C#, and vanilla JavaScript — no calculator libraries, no Bootstrap, no jQuery.
+A scientific web calculator built from scratch with ASP.NET Core, C#, and vanilla JavaScript: no calculator libraries, no Bootstrap, no jQuery.
 
-The core of the project is a hand-written **recursive-descent expression parser** that correctly resolves operator precedence, nested parentheses, and the classic unary-vs-binary minus ambiguity — a common source of bugs in naive calculator implementations that split expressions with regex or evaluate left-to-right without a real grammar.
+The core of the project is a hand-written **recursive-descent expression parser** that correctly resolves operator precedence, nested parentheses, and the classic unary-vs-binary minus ambiguity, a common source of bugs in naive calculator implementations that split expressions with regex or evaluate left-to-right without a real grammar.
 
 Built as a portfolio project for Junior .NET Developer / Back-end Developer roles.
 
@@ -38,7 +38,7 @@ factorial    → primary ('!')*
 primary      → NUMBER | CONSTANT | functionCall | '(' expression ')'
 functionCall → FUNCTION '(' expression ')'
 
-The key insight: a `-` is only ever treated as **unary** inside `ParseUnary()`, which is exclusively reached when the grammar expects the *start* of a new operand — right after `(`, right after another operator, or at the very beginning of the expression. Everywhere else, it's binary. This resolves the ambiguity structurally, through the grammar itself, rather than through lexical guesswork in the tokenizer.
+The key insight: a `-` is only ever treated as **unary** inside `ParseUnary()`, which is exclusively reached when the grammar expects the *start* of a new operand: right after `(`, right after another operator, or at the very beginning of the expression. Everywhere else, it's binary. This resolves the ambiguity structurally, through the grammar itself, rather than through lexical guesswork in the tokenizer.
 
 See [`ExpressionParser.cs`](src/AdvancedCalculator.Web/Services/ExpressionEvaluator/ExpressionParser.cs) for the full implementation and [`ExpressionParserTests.cs`](tests/AdvancedCalculator.Tests/ExpressionParserTests.cs) for the test suite.
 
@@ -91,7 +91,7 @@ advanced-web-calculator/
 
 ## License
 
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Author
 
