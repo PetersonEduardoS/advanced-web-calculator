@@ -123,7 +123,7 @@ public sealed class ExpressionParser
     // This is the ONLY place where a leading '-' or '+' is treated as a sign rather than
     // a binary operator. It is reached whenever the grammar needs a fresh operand:
     // at the start of the whole expression, right after '(', or right after another
-    // binary operator (+, -, *, /) — exactly the positions where a "negative number"
+    // binary operator (+, -, *, /), exactly the positions where a "negative number"
     // is mathematically meaningful.
     private double ParseUnary()
     {
