@@ -1,3 +1,5 @@
+[![.NET Tests](https://github.com/PetersonEduardoS/advanced-web-calculator/actions/workflows/dotnet-tests.yml/badge.svg)](https://github.com/PetersonEduardoS/advanced-web-calculator/actions/workflows/dotnet-tests.yml)
+
 # Advanced Calculator
 
 A scientific web calculator built from scratch with ASP.NET Core, C#, and vanilla JavaScript: no calculator libraries, no Bootstrap, no jQuery.
